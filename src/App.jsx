@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
 import Footer from './components/Footer';
+import { BackgroundMusicPlayer } from './components/BackgroundMusicPlayer'; // importe o player
 
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <Router>
       <Header />
+      <BackgroundMusicPlayer /> {/* Adicionado aqui */}
       <main style={{ minHeight: '80vh', padding: '20px' }}>
         <Routes>
           <Route path="/" element={<Home />} />

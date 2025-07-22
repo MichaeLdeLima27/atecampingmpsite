@@ -1,40 +1,44 @@
 import styled from 'styled-components';
 import card1 from '../assets/card1.JPG';
 import card2 from '../assets/card2.JPG';
-import card3 from '../assets/card3.png';
-import card4 from '../assets/card1.JPG'; // Pode criar mais imagens para a segunda sessão
-import card5 from '../assets/card2.JPG';
-import card6 from '../assets/card3.png';
+import card3 from '../assets/card2.JPG';
+import card4 from '../assets/picoparana.jpg';
+import card5 from '../assets/morrodocanal.jpg';
+import card6 from '../assets/morrocaratuva.webp';
+import card7 from '../assets/caminhodoitupava.jpg';
 import { VideoGallery } from '../components/VideoGallery';
 
 const Section = styled.section`
-  width: 100%;
   max-width: 1200px;
   margin: 80px auto;
   padding: 0 20px;
-  box-sizing: border-box;
 `;
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
   margin-bottom: 40px;
-  font-weight: 700;
-  color: #222;
   text-align: center;
+  color: #222;
 `;
 
 const ContentRow = styled.div`
   display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 60px;
-  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+`;
+
+const ContentImage = styled.img`
+  width: 50%;
+  min-width: 300px;
+  border-radius: 5px;
+  object-fit: cover;
 `;
 
 const ContentText = styled.div`
-  flex: 1 1 480px;
-  max-width: 480px;
+  flex: 1;
+  min-width: 300px;
 
   h3 {
     font-size: 2rem;
@@ -49,56 +53,34 @@ const ContentText = styled.div`
   }
 `;
 
-const ContentImage = styled.img`
-  flex: 1 1 480px;
-  max-width: 480px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  object-fit: cover;
-`;
-
-const CardsContainer = styled.div`
+const ImagesRow = styled.div`
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: ${({ align }) => align};
+  margin-bottom: 60px;
 `;
 
-const Card = styled.div`
-  width: 280px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: translateY(-6px);
-  }
+const ImageBlock = styled.div`
+  width: 30%;
+  min-width: 280px;
+  text-align: center;
 
   img {
     width: 100%;
-    height: 160px;
+    border-radius: 5px;
     object-fit: cover;
   }
 
-  div {
-    padding: 16px;
-  }
-
   h4 {
-    margin: 0 0 8px;
+    margin-top: 10px;
     font-size: 1.2rem;
     color: #222;
   }
 
   p {
-    margin: 0;
-    color: #666;
     font-size: 0.95rem;
-    line-height: 1.4;
+    color: #555;
   }
 `;
 
@@ -113,14 +95,13 @@ const VideoSection = styled.section`
 const VideoTitle = styled.h2`
   font-size: 2rem;
   margin-bottom: 30px;
-  color: #222;
   text-align: center;
+  color: #222;
 `;
 
 export default function Home() {
   return (
     <>
-      {/* Seção 1 */}
       <Section>
         <SectionTitle>Descubra o camping como nunca antes</SectionTitle>
         <ContentRow>
@@ -132,69 +113,55 @@ export default function Home() {
             </p>
           </ContentText>
         </ContentRow>
-        <CardsContainer>
-          <Card>
+        <ImagesRow align="flex-start">
+          <ImageBlock>
             <img src={card1} alt="Dicas Essenciais" />
-            <div>
-              <h4>Dicas Essenciais</h4>
-              <p>Equipamentos que não podem faltar na sua mochila.</p>
-            </div>
-          </Card>
-          <Card>
+            <h4>Dicas Essenciais</h4>
+            <p>Equipamentos que não podem faltar na sua mochila.</p>
+          </ImageBlock>
+          <ImageBlock>
             <img src={card2} alt="Melhores Destinos" />
-            <div>
-              <h4>Melhores Destinos</h4>
-              <p>Os locais mais incríveis para acampar em 2025.</p>
-            </div>
-          </Card>
-          <Card>
+            <h4>Melhores Destinos</h4>
+            <p>Os locais mais incríveis para acampar em 2025.</p>
+          </ImageBlock>
+          <ImageBlock>
             <img src={card3} alt="Comunidade ATÉ" />
-            <div>
-              <h4>Comunidade ATÉ</h4>
-              <p>Participe de eventos e troque experiências com outros aventureiros.</p>
-            </div>
-          </Card>
-        </CardsContainer>
+            <h4>Comunidade ATÉ</h4>
+            <p>Participe de eventos e troque experiências com outros aventureiros.</p>
+          </ImageBlock>
+        </ImagesRow>
       </Section>
 
-      {/* Seção 2 */}
       <Section>
-        <SectionTitle>Momentos inesquecíveis em família</SectionTitle>
+        <SectionTitle>Top 5 Montanhas Mais Conhecidas do Paraná</SectionTitle>
         <ContentRow style={{ flexDirection: 'row-reverse' }}>
           <ContentImage src={card4} alt="Camping em família" />
           <ContentText>
-            <h3>Aproveite a natureza com quem você ama</h3>
+            <h3>Pico Paraná, Gigante do Sul</h3>
             <p>
-              O camping é uma oportunidade perfeita para criar memórias eternas e desfrutar do ar livre com sua família.
+              O Pico Paraná é o ponto mais alto do Sul do Brasil, com 1.877 metros. Um convite para quem busca aventura, contato com a natureza e vistas inesquecíveis!
             </p>
           </ContentText>
         </ContentRow>
-        <CardsContainer>
-          <Card>
-            <img src={card4} alt="Preparação" />
-            <div>
-              <h4>Preparação</h4>
-              <p>Como organizar sua viagem para a família.</p>
-            </div>
-          </Card>
-          <Card>
-            <img src={card5} alt="Segurança" />
-            <div>
-              <h4>Segurança</h4>
-              <p>Dicas para garantir uma aventura tranquila.</p>
-            </div>
-          </Card>
-          <Card>
-            <img src={card6} alt="Natureza" />
-            <div>
-              <h4>Natureza</h4>
-              <p>Conecte-se com o meio ambiente de forma responsável.</p>
-            </div>
-          </Card>
-        </CardsContainer>
+        <ImagesRow align="flex-end">
+          <ImageBlock>
+            <img src={card5} alt="Preparação" />
+            <h4> Morro do Canal (Piraquara)</h4>
+            <p>Localizado em Piraquara, a cerca de 30 km de Curitiba, o Morro do Canal é um dos destinos mais procurados pelos aventureiros. Com 1.360 metros de altitude, oferece trilha acessível, desafios leves e um visual incrível da Serra do Mar e das represas da região. Ideal para quem busca natureza e emoção sem sair perto da capital.</p>
+          </ImageBlock>
+          <ImageBlock>
+            <img src={card6} alt="Segurança" />
+            <h4>Morro (Pico) Caratuva – A Segunda Gigante do Sul</h4>
+            <p>O Pico Caratuva, com altitudes estimadas entre 1.850 m e 1.860 m, é a segunda montanha mais alta da região Sul do Brasil, perdendo apenas para o Pico Paraná</p>
+          </ImageBlock>
+          <ImageBlock>
+            <img src={card7} alt="Natureza" />
+            <h4>Caminho do Itupava: Trilha Histórica e Natureza Preservada</h4>
+            <p>O Caminho do Itupava é uma antiga rota histórica que atravessa a Mata Atlântica no Paraná, oferecendo uma bela trilha de cerca de 36 km entre Curitiba e Morretes, com paisagens naturais, flora e fauna preservadas.</p>
+          </ImageBlock>
+        </ImagesRow>
       </Section>
 
-      {/* Seção Vídeos */}
       <VideoSection>
         <VideoTitle>Vídeos Recentes</VideoTitle>
         <VideoGallery />
