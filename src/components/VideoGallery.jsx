@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Container from '../styles/Container';
 
 const VideosSection = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const VideoCard = styled.div`
 
   &:hover {
     transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* sombra um pouco maior no hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* sombra maior no hover */
   }
 
   @media (max-width: 768px) {
@@ -61,25 +62,39 @@ const ChannelButton = styled.a`
 
 export function VideoGallery() {
   return (
-    <VideosSection>
-      <VideosWrapper>
-        <VideoCard>
-          <VideoFrame src="https://www.youtube.com/embed/JiFE5lMI7ww?start=14" title="Vídeo 1" allowFullScreen />
-        </VideoCard>
-        <VideoCard>
-          <VideoFrame src="https://www.youtube.com/embed/yXHF8vi51NI?start=143" title="Vídeo 2" allowFullScreen />
-        </VideoCard>
-        <VideoCard>
-          <VideoFrame src="https://www.youtube.com/embed/KyMlzn3-6Ik?start=1019" title="Vídeo 3" allowFullScreen />
-        </VideoCard>
-      </VideosWrapper>
-      <ChannelButton
-        href="https://www.youtube.com/@atecamping"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Conheça o canal e se inscreva
-      </ChannelButton>
-    </VideosSection>
+    <Container>
+      <VideosSection>
+        <VideosWrapper>
+          <VideoCard>
+            <VideoFrame
+              src="https://www.youtube.com/embed/JiFE5lMI7ww?start=14"
+              title="Vídeo 1"
+              allowFullScreen
+            />
+          </VideoCard>
+          <VideoCard>
+            <VideoFrame
+              src="https://www.youtube.com/embed/yXHF8vi51NI?start=143"
+              title="Vídeo 2"
+              allowFullScreen
+            />
+          </VideoCard>
+          <VideoCard>
+            <VideoFrame
+              src="https://www.youtube.com/embed/KyMlzn3-6Ik?start=1019"
+              title="Vídeo 3"
+              allowFullScreen
+            />
+          </VideoCard>
+        </VideosWrapper>
+        <ChannelButton
+          href="https://www.youtube.com/@atecamping"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Conheça o canal e se inscreva
+        </ChannelButton>
+      </VideosSection>
+    </Container>
   );
 }

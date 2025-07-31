@@ -1,6 +1,6 @@
-// components/Header.tsx
 import styled from 'styled-components';
-import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; // Importante!
+import { FaFacebook, FaInstagram, FaYoutube, FaSearch } from 'react-icons/fa';
 import LogoImg from '../assets/logo.webp';
 
 const HeaderWrapper = styled.div`
@@ -50,7 +50,7 @@ const NavLinks = styled.nav`
   flex-wrap: wrap;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   color: #555;
   text-decoration: none;
   font-weight: 500;
@@ -72,11 +72,35 @@ const RightSection = styled.div`
   gap: 10px;
 `;
 
+const SearchWrapper = styled.form`
+  position: relative;
+  width: 250px;
+`;
+
 const SearchInput = styled.input`
-  padding: 8px 12px;
+  padding: 8px 40px 8px 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  width: 250px;
+  width: 100%;
+  font-size: 1rem;
+`;
+
+const SearchButton = styled.button`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 1.2rem;
+  padding: 0;
+
+  &:hover {
+    color: #5b8030ff;
+    transform: translateY(-50%) scale(1.2);
+  }
 `;
 
 const SocialIcons = styled.div`
@@ -96,6 +120,15 @@ const SocialIcons = styled.div`
 `;
 
 export const Header = () => {
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const query = form.search.value.trim();
+    if (query) {
+      alert(`Buscar por: ${query}`);
+    }
+  };
+
   return (
     <HeaderWrapper>
       <HeaderContainer>
@@ -105,23 +138,34 @@ export const Header = () => {
             <Title>Camping & vida</Title>
           </LogoTitleContainer>
           <NavLinks>
-            <NavLink href="#home">Home</NavLink>
-            <NavLink href="#blog">Blog</NavLink>
-            <NavLink href="#loja">Loja</NavLink>
-            <NavLink href="#sobre">Sobre</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/loja">Loja</NavLink>
+            <NavLink to="/sobre">Sobre</NavLink>
           </NavLinks>
         </LeftSection>
 
         <RightSection>
-          <SearchInput type="text" placeholder="Pesquise no site..." />
+          <SearchWrapper onSubmit={handleSearchSubmit}>
+            <SearchInput
+              type="text"
+              name="search"
+              placeholder="Pesquise no site..."
+              aria-label="Pesquisar no site"
+            />
+            <SearchButton type="submit" aria-label="Buscar">
+              <FaSearch />
+            </SearchButton>
+          </SearchWrapper>
+
           <SocialIcons>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <FaFacebook />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://www.youtube.com/@atecamping" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.youtube.com/@atecamping" target="_blank" rel="noopener noreferrer" aria-label="Youtube">
               <FaYoutube />
             </a>
           </SocialIcons>

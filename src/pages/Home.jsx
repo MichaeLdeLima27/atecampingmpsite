@@ -19,38 +19,67 @@ const SectionTitle = styled.h2`
   margin-bottom: 40px;
   text-align: center;
   color: #222;
+  font-weight: 600;
 `;
 
 const ContentRow = styled.div`
   display: flex;
-  align-items: center;
   gap: 40px;
   margin-bottom: 30px;
   flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: ${(props) => (props.reverse ? 'row-reverse' : 'row')};
 `;
 
 const ContentImage = styled.img`
-  width: 50%;
-  min-width: 300px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 5px;
   object-fit: cover;
+  flex: 1 1 600px;
 `;
 
 const ContentText = styled.div`
-  flex: 1;
+  flex: 1 1 400px;
   min-width: 300px;
+  display: flex;
+  flex-direction: column;
+`;
 
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #222;
-  }
+const TopButton = styled.a`
+  align-self: flex-start;
+  margin-bottom: 14px;
+  background-color: ${(props) => props.color || '#5b8030'};
+  border: 2px solid ${(props) => props.color || '#5b8030'};
+  color: white;
+  font-weight: 300;
+  font-size: 0.7rem;
+  padding: 5px 15px;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 
-  p {
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.6;
+  /* Remove margin-bottom quando estiver reverso para aproximar o botão da imagem */
+  margin-bottom: ${(props) => (props.reverse ? '4px' : '14px')};
+
+  &:hover {
+    opacity: 0.85;
   }
+`;
+
+const Title = styled.h3`
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 600;
+`;
+
+const Paragraph = styled.p`
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  font-weight: 400;
 `;
 
 const ImagesRow = styled.div`
@@ -62,23 +91,48 @@ const ImagesRow = styled.div`
 `;
 
 const ImageBlock = styled.div`
-  width: 30%;
+  flex: 1 1 30%;
   min-width: 280px;
-  text-align: center;
+  text-align: left;
 
   img {
     width: 100%;
+    height: auto;
     border-radius: 5px;
     object-fit: cover;
+    display: block;
+  }
+
+  a.readMoreBtn {
+    display: inline-block;
+    margin: 12px 0 6px;
+    padding: 6px 14px;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: white;
+    background-color: ${(props) => props.color || '#5b8030'};
+    border: 1.5px solid ${(props) => props.color || '#5b8030'};
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    letter-spacing: 0.03em;
+  }
+
+  a.readMoreBtn:hover {
+    opacity: 0.85;
   }
 
   h4 {
-    margin-top: 10px;
+    font-weight: 600;
+    margin-top: 6px;
     font-size: 1.2rem;
     color: #222;
   }
 
   p {
+    font-weight: 400;
     font-size: 0.95rem;
     color: #555;
   }
@@ -97,6 +151,7 @@ const VideoTitle = styled.h2`
   margin-bottom: 30px;
   text-align: center;
   color: #222;
+  font-weight: 600;
 `;
 
 export default function Home() {
@@ -107,25 +162,53 @@ export default function Home() {
         <ContentRow>
           <ContentImage src={card1} alt="Camping aventureiro" />
           <ContentText>
-            <h3>Aventure-se com conforto e segurança</h3>
-            <p>
+            <TopButton href="/blog/dicas-essenciais" color="#5b8030" aria-label="Dicas de hotéis">
+              Dicas de hotéis
+            </TopButton>
+            <Title>Aventure-se com conforto e segurança</Title>
+            <Paragraph>
               Conheça os melhores lugares para acampar, dicas essenciais e equipamentos que fazem a diferença para você aproveitar cada momento na natureza.
-            </p>
+            </Paragraph>
           </ContentText>
         </ContentRow>
+
         <ImagesRow align="flex-start">
           <ImageBlock>
             <img src={card1} alt="Dicas Essenciais" />
+            <a
+              href="/blog/dicas-essenciais"
+              className="readMoreBtn"
+              style={{ backgroundColor: '#5b8030', borderColor: '#5b8030' }}
+              aria-label="Leia mais sobre Dicas Essenciais"
+            >
+              Leia mais
+            </a>
             <h4>Dicas Essenciais</h4>
             <p>Equipamentos que não podem faltar na sua mochila.</p>
           </ImageBlock>
           <ImageBlock>
             <img src={card2} alt="Melhores Destinos" />
+            <a
+              href="/blog/melhores-destinos"
+              className="readMoreBtn"
+              style={{ backgroundColor: '#c5a33f', borderColor: '#c5a33f' }}
+              aria-label="Leia mais sobre Melhores Destinos"
+            >
+              Leia mais
+            </a>
             <h4>Melhores Destinos</h4>
             <p>Os locais mais incríveis para acampar em 2025.</p>
           </ImageBlock>
           <ImageBlock>
             <img src={card3} alt="Comunidade ATÉ" />
+            <a
+              href="/blog/comunidade-ate"
+              className="readMoreBtn"
+              style={{ backgroundColor: '#ac4b2a', borderColor: '#ac4b2a' }}
+              aria-label="Leia mais sobre Comunidade ATÉ"
+            >
+              Leia mais
+            </a>
             <h4>Comunidade ATÉ</h4>
             <p>Participe de eventos e troque experiências com outros aventureiros.</p>
           </ImageBlock>
@@ -134,30 +217,69 @@ export default function Home() {
 
       <Section>
         <SectionTitle>Top 5 Montanhas Mais Conhecidas do Paraná</SectionTitle>
-        <ContentRow style={{ flexDirection: 'row-reverse' }}>
+        <ContentRow reverse>
           <ContentImage src={card4} alt="Camping em família" />
           <ContentText>
-            <h3>Pico Paraná, Gigante do Sul</h3>
-            <p>
+            <TopButton
+              href="/blog/o-que-fazer"
+              color="#c5a33f"
+              aria-label="O que fazer"
+              reverse
+            >
+              O que fazer
+            </TopButton>
+            <Title>Pico Paraná, Gigante do Sul</Title>
+            <Paragraph>
               O Pico Paraná é o ponto mais alto do Sul do Brasil, com 1.877 metros. Um convite para quem busca aventura, contato com a natureza e vistas inesquecíveis!
-            </p>
+            </Paragraph>
           </ContentText>
         </ContentRow>
+
         <ImagesRow align="flex-end">
           <ImageBlock>
             <img src={card5} alt="Preparação" />
-            <h4> Morro do Canal (Piraquara)</h4>
-            <p>Localizado em Piraquara, a cerca de 30 km de Curitiba, o Morro do Canal é um dos destinos mais procurados pelos aventureiros. Com 1.360 metros de altitude, oferece trilha acessível, desafios leves e um visual incrível da Serra do Mar e das represas da região. Ideal para quem busca natureza e emoção sem sair perto da capital.</p>
+            <a
+              href="/blog/morro-do-canal"
+              className="readMoreBtn"
+              style={{ backgroundColor: '#5b8030', borderColor: '#5b8030' }}
+              aria-label="Leia mais sobre Morro do Canal"
+            >
+              Leia mais
+            </a>
+            <h4>Morro do Canal (Piraquara)</h4>
+            <p>
+              Localizado em Piraquara, a cerca de 30 km de Curitiba, o Morro do Canal é um dos destinos mais procurados pelos aventureiros. Com 1.360 metros de altitude, oferece trilha acessível, desafios leves e um visual incrível da Serra do Mar e das represas da região. Ideal para quem busca natureza e emoção sem sair perto da capital.
+            </p>
           </ImageBlock>
           <ImageBlock>
             <img src={card6} alt="Segurança" />
+            <a
+              href="/blog/morro-caratuva"
+              className="readMoreBtn"
+              style={{ backgroundColor: '#c5a33f', borderColor: '#c5a33f' }}
+              aria-label="Leia mais sobre Morro Caratuva"
+            >
+              Leia mais
+            </a>
             <h4>Morro (Pico) Caratuva – A Segunda Gigante do Sul</h4>
-            <p>O Pico Caratuva, com altitudes estimadas entre 1.850 m e 1.860 m, é a segunda montanha mais alta da região Sul do Brasil, perdendo apenas para o Pico Paraná</p>
+            <p>
+              O Pico Caratuva, com altitudes estimadas entre 1.850 m e 1.860 m, é a segunda montanha mais alta da região Sul do Brasil, perdendo apenas para o Pico Paraná.
+            </p>
           </ImageBlock>
           <ImageBlock>
             <img src={card7} alt="Natureza" />
+            <a
+              href="/blog/caminho-do-itupava"
+              className="readMoreBtn"
+              style={{ backgroundColor: '#ac4b2a', borderColor: '#ac4b2a' }}
+              aria-label="Leia mais sobre Caminho do Itupava"
+            >
+              Leia mais
+            </a>
             <h4>Caminho do Itupava: Trilha Histórica e Natureza Preservada</h4>
-            <p>O Caminho do Itupava é uma antiga rota histórica que atravessa a Mata Atlântica no Paraná, oferecendo uma bela trilha de cerca de 36 km entre Curitiba e Morretes, com paisagens naturais, flora e fauna preservadas.</p>
+            <p>
+              O Caminho do Itupava é uma antiga rota histórica que atravessa a Mata Atlântica no Paraná, oferecendo uma bela trilha de cerca de 36 km entre Curitiba e Morretes, com paisagens naturais, flora e fauna preservadas.
+            </p>
           </ImageBlock>
         </ImagesRow>
       </Section>

@@ -1,6 +1,7 @@
 // components/Footer.tsx
 import styled from 'styled-components';
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
+import Container from '../styles/Container'; // Importando o Container
 
 const FooterContainer = styled.footer`
   background-color: #f7f7f7;
@@ -10,11 +11,7 @@ const FooterContainer = styled.footer`
   color: #555;
 `;
 
-// Container interno para alinhar e limitar largura
 const FooterContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -71,37 +68,39 @@ const SocialLinks = styled.div`
 export default function Footer() {
   return (
     <FooterContainer>
-      <FooterContent>
-        <Section>
-          <Title>ATÉ Camping</Title>
-          <p>Seu destino para aventuras ao ar livre. Equipamentos, dicas e mais!</p>
-        </Section>
+      <Container>
+        <FooterContent>
+          <Section>
+            <Title>ATÉ Camping</Title>
+            <p>Seu destino para aventuras ao ar livre. Equipamentos, dicas e mais!</p>
+          </Section>
 
-        <Section>
-          <Title>Links Úteis</Title>
-          <LinkList>
-            <LinkItem><a href="/sobre">Sobre</a></LinkItem>
-            <LinkItem><a href="/blog">Blog</a></LinkItem>
-            <LinkItem><a href="/loja">Loja</a></LinkItem>
-            <LinkItem><a href="/contato">Contato</a></LinkItem>
-          </LinkList>
-        </Section>
+          <Section>
+            <Title>Links Úteis</Title>
+            <LinkList>
+              <LinkItem><a href="/sobre">Sobre</a></LinkItem>
+              <LinkItem><a href="/blog">Blog</a></LinkItem>
+              <LinkItem><a href="/loja">Loja</a></LinkItem>
+              <LinkItem><a href="/contato">Contato</a></LinkItem>
+            </LinkList>
+          </Section>
 
-        <Section>
-          <Title>Siga-nos</Title>
-          <SocialLinks>
-            <a href="https://facebook.com/atecamping" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <FaFacebookF />
-            </a>
-            <a href="https://instagram.com/atecamping" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <FaInstagram />
-            </a>
-            <a href="https://www.youtube.com/@atecamping" aria-label="Youtube" target="_blank" rel="noopener noreferrer">
-              <FaYoutube />
-            </a>
-          </SocialLinks>
-        </Section>
-      </FooterContent>
+          <Section>
+            <Title>Siga-nos</Title>
+            <SocialLinks>
+              <a href="https://facebook.com/atecamping" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                <FaFacebookF />
+              </a>
+              <a href="https://instagram.com/atecamping" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <FaInstagram />
+              </a>
+              <a href="https://www.youtube.com/@atecamping" aria-label="Youtube" target="_blank" rel="noopener noreferrer">
+                <FaYoutube />
+              </a>
+            </SocialLinks>
+          </Section>
+        </FooterContent>
+      </Container>
     </FooterContainer>
   );
 }
