@@ -15,7 +15,7 @@ const CarouselContainer = styled.div`
 
 const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
@@ -57,7 +57,7 @@ const ImageNav = styled.div`
 
 const Arrow = styled.button`
   border: none;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   font-size: 20px;
   color: black;
   cursor: pointer;
@@ -67,7 +67,7 @@ const Arrow = styled.button`
   transition: background 0.3s;
 
   &:hover {
-    background: rgba(255,255,255,1);
+    background: rgba(255, 255, 255, 1);
   }
 `;
 
@@ -140,53 +140,48 @@ const Modal = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  padding: 10px;
+  padding: 0;
   box-sizing: border-box;
 `;
 
 const ModalContent = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 98vw;
-  max-height: 98vh;
+  width: 90vw;
+  max-width: 1200px;
+  height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 30px;
+  background: transparent;
 `;
 
-const ModalImageContainer = styled.div`
+const ModalImageWrapper = styled.div`
+  flex: 1;
   position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 98vw;
-  max-height: 98vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 `;
 
 const ModalImage = styled.img`
-  max-width: 90vw;
-  max-height: 80vh;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   border-radius: 8px;
 `;
 
 const ModalArrow = styled.button`
-  position: absolute;
-  top: 10px; /* Alinhado no topo da imagem */
-  border: none;
-  background: rgba(255,255,255,0.7);
-  font-size: 30px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 32px;
   color: black;
   cursor: pointer;
+  border: none;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -195,24 +190,37 @@ const ModalArrow = styled.button`
   justify-content: center;
   transition: background 0.3s;
   user-select: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 
   &:hover {
-    background: rgba(255,255,255,1);
+    background: rgba(255, 255, 255, 1);
   }
 `;
 
 const ModalArrowLeft = styled(ModalArrow)`
-  left: calc(50% - 520px); /* 50% central menos metade da largura da imagem (450 + margem) */
-  @media (max-width: 1100px) {
-    left: 10px; /* Em telas menores, seta fica perto da borda esquerda */
-  }
+  left: -70px;
 `;
 
 const ModalArrowRight = styled(ModalArrow)`
-  right: calc(50% - 520px);
-  @media (max-width: 1100px) {
-    right: 10px;
-  }
+  right: -70px;
+`;
+
+const ModalInfo = styled.div`
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: white;
+`;
+
+const ModalPrice = styled.div`
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffd814;
 `;
 
 const CloseButton = styled.button`
@@ -220,59 +228,61 @@ const CloseButton = styled.button`
   top: 15px;
   right: 25px;
   font-size: 30px;
-  color: black;
+  color: white;
   background: none;
   border: none;
   cursor: pointer;
   font-weight: 700;
+  z-index: 10;
 `;
 
 const ModalBuyButton = styled.a`
-  margin-top: 20px;
   background-color: #ffd814;
   border: 1px solid #fcd200;
   color: #111;
-  padding: 12px 30px;
+  padding: 14px 40px;
   border-radius: 5px;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
   user-select: none;
+  text-align: center;
 
   &:hover {
     background-color: #f7ca00;
   }
 `;
 
-// Gerar 40 produtos fictícios com 4 imagens cada
 const products = Array.from({ length: 40 }, (_, i) => ({
   id: i,
   name: `Produto Fictício ${i + 1}`,
   priceCurrent: `R$${(100 + i * 5).toFixed(2)}`,
   priceOld: `R$${(120 + i * 5).toFixed(2)}`,
   images: [
-    `https://picsum.photos/id/${100 + i * 4}/400/300`,
-    `https://picsum.photos/id/${101 + i * 4}/400/300`,
-    `https://picsum.photos/id/${102 + i * 4}/400/300`,
-    `https://picsum.photos/id/${103 + i * 4}/400/300`,
+    `https://picsum.photos/id/${10 + i}/900/900`,
+    `https://picsum.photos/id/${20 + i}/900/900`,
+    `https://picsum.photos/id/${30 + i}/900/900`,
+    `https://picsum.photos/id/${40 + i}/900/900`,
   ],
   link: `https://shopee.com.br/product-${i}`,
 }));
 
-const ITEMS_PER_PAGE = 8; // 2 fileiras de 4 cards
+const ITEMS_PER_PAGE = 8;
 
 const Loja = () => {
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [modalImages, setModalImages] = useState([]);
   const [modalBuyLink, setModalBuyLink] = useState('');
+  const [modalPrice, setModalPrice] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentSlideIndexes, setCurrentSlideIndexes] = useState({});
   const [page, setPage] = useState(1);
 
-  const handleImageClick = (images, index, buyLink) => {
+  const handleImageClick = (images, index, buyLink, price) => {
     setModalImages(images);
     setModalImageIndex(index);
     setModalBuyLink(buyLink);
+    setModalPrice(price);
     setIsModalOpen(true);
   };
 
@@ -302,18 +312,10 @@ const Loja = () => {
   return (
     <LojaContainer>
       <CarouselContainer>
-        <Slider
-          dots
-          infinite
-          speed={500}
-          slidesToShow={1}
-          slidesToScroll={1}
-          autoplay
-          autoplaySpeed={4000}
-        >
-          <img src="https://picsum.photos/1200/400?random=1" alt="promo1" />
-          <img src="https://picsum.photos/1200/400?random=2" alt="promo2" />
-          <img src="https://picsum.photos/1200/400?random=3" alt="promo3" />
+        <Slider dots infinite speed={500} slidesToShow={1} slidesToScroll={1} autoplay autoplaySpeed={4000}>
+          <img src="https://picsum.photos/1200/400?random=101" alt="Promo 1" />
+          <img src="https://picsum.photos/1200/400?random=102" alt="Promo 2" />
+          <img src="https://picsum.photos/1200/400?random=103" alt="Promo 3" />
         </Slider>
       </CarouselContainer>
 
@@ -328,7 +330,8 @@ const Loja = () => {
                   handleImageClick(
                     product.images,
                     currentSlideIndexes[product.id] || 0,
-                    product.link
+                    product.link,
+                    product.priceCurrent
                   )
                 }
               />
@@ -351,11 +354,7 @@ const Loja = () => {
 
       <PaginationContainer>
         {[...Array(5)].map((_, i) => (
-          <PaginationButton
-            key={i}
-            active={page === i + 1}
-            onClick={() => setPage(i + 1)}
-          >
+          <PaginationButton key={i} active={page === i + 1} onClick={() => setPage(i + 1)}>
             {i + 1}
           </PaginationButton>
         ))}
@@ -366,15 +365,18 @@ const Loja = () => {
           <ModalContent onClick={(e) => e.stopPropagation()}>
             <CloseButton onClick={() => setIsModalOpen(false)}>&times;</CloseButton>
 
-            <ModalImageContainer>
+            <ModalImageWrapper>
               <ModalArrowLeft onClick={handlePrevImage}>&lt;</ModalArrowLeft>
               <ModalImage src={modalImages[modalImageIndex]} alt="Imagem ampliada" />
               <ModalArrowRight onClick={handleNextImage}>&gt;</ModalArrowRight>
-            </ModalImageContainer>
+            </ModalImageWrapper>
 
-            <ModalBuyButton href={modalBuyLink} target="_blank" rel="noopener noreferrer">
-              Comprar
-            </ModalBuyButton>
+            <ModalInfo>
+              <ModalPrice>{modalPrice}</ModalPrice>
+              <ModalBuyButton href={modalBuyLink} target="_blank" rel="noopener noreferrer">
+                Comprar
+              </ModalBuyButton>
+            </ModalInfo>
           </ModalContent>
         </Modal>
       )}
